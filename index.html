@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>REST API Example</title>
+</head>
+<body>
+  <button id="fetchItems">Fetch Items</button>
+  <ul id="itemList"></ul>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Fetch items from the server using jQuery AJAX
+    $("#fetchItems").on("click", () => {
+      $.ajax({
+        url: "http://localhost:3000/api",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+          // Display the items in the list
+          const itemList = $("#itemList");
+          itemList.empty();
+          data.forEach(item => {
+            itemList.append(`<li>${item.name}</li>`);
+          });
+        },
+        error: function (error) {
+          console.error("Error fetching items:", error);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
